@@ -30,7 +30,8 @@ import {
     exportDefaultDeclarationConverter,
     classDeclarationConverter,
     objectPatternConverter,
-    arrayPatternConverter
+    arrayPatternConverter,
+    awaitConverter
 } from './converters/Harmony';
 
 const singleTypeFilter = path => {
@@ -321,6 +322,18 @@ export const DefinitionsMap = {
             );
         },
         body: true
+    },
+
+    // Async/Await (ES2017)
+    [TOKEN_TYPES.AWAIT_EXPRESSION]: {
+        type: TOKEN_TYPES.AWAIT_EXPRESSION,
+        getName: awaitConverter,
+        body: false,
+        ignore: path => {
+            // Ignore await when it's part of a variable declaration (already shown there)
+            const statementParent = path.getStatementParent();
+            return statementParent.isVariableDeclaration();
+        }
     }
 };
 

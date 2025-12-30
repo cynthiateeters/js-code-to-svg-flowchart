@@ -55,7 +55,10 @@ export const TOKEN_TYPES = {
     REST_PROPERTY: 'RestProperty',
     OBJECT_PATTERN: 'ObjectPattern',
     ARRAY_PATTERN: 'ArrayPattern',
-    ASSIGNMENT_PATTERN: 'AssignmentPattern'
+    ASSIGNMENT_PATTERN: 'AssignmentPattern',
+
+    // Async/Await (ES2017)
+    AWAIT_EXPRESSION: 'AwaitExpression'
 };
 
 export const TOKEN_KEYS = {

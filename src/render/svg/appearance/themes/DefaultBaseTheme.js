@@ -268,6 +268,12 @@ export const buildTheme = config => {
                 fillColor: config.rectangleDotFillColor
             },
             fillColor: config.callFillColor
+        },
+
+        AwaitExpression: {
+            ...BaseShape,
+            fillColor: config.rectangleFillColor,
+            roundBorder: 3
         }
     };
 };

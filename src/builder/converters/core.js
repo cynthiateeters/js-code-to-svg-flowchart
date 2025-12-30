@@ -19,18 +19,19 @@ export const functionConverter = path => {
         paramsCode = getFunctionParametersCode(node.params);
 
     let name = '';
+    const asyncPrefix = node.async ? 'async ' : '';
 
     if (node.id) {
-        name = getAnonymousFunctionName(path) + 'function ' + node.id.name + paramsCode;
+        name = getAnonymousFunctionName(path) + asyncPrefix + 'function ' + node.id.name + paramsCode;
     } else if (node.type === TOKEN_TYPES.ARROW_FUNCTION_EXPRESSION) {
-        name = getAnonymousFunctionName(path) + paramsCode + ' =>';
+        name = getAnonymousFunctionName(path) + asyncPrefix + paramsCode + ' =>';
     } else if (node.type === TOKEN_TYPES.CLASS_METHOD || node.type === TOKEN_TYPES.OBJECT_METHOD) {
         name =
             node.kind === CLASS_FUNCTION_KINDS.CONSTRUCTOR
                 ? 'constructor' + paramsCode
-                : node.key.name + paramsCode;
+                : (node.async ? 'async ' : '') + node.key.name + paramsCode;
     } else {
-        name = getAnonymousFunctionName(path) + 'function' + paramsCode;
+        name = getAnonymousFunctionName(path) + asyncPrefix + 'function' + paramsCode;
     }
 
     return { name, pathParentType: path.parent.type };

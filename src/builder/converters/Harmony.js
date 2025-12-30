@@ -53,3 +53,8 @@ export const classDeclarationConverter = ({ node }) => {
 export const objectPatternConverter = () => '{...}';
 
 export const arrayPatternConverter = () => '[...]';
+
+export const awaitConverter = path => {
+    const argument = path.node.argument;
+    return `await ${generate(argument).code}`;
+};
